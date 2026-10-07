@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff1744">
+<title>DealDekho - Download</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#fff5f6,#fff,#fff0f3);color:#171717}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px}
+.card{width:100%;max-width:430px;background:#fff;border-radius:28px;padding:32px 24px;box-shadow:0 14px 45px #00000018;text-align:center}
+.logo{width:86px;height:86px;border-radius:22px;margin:0 auto 18px;background:linear-gradient(135deg,#ff1744,#ff6b35);display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;font-weight:800;box-shadow:0 10px 24px #ff174438}
+h1{margin:0;font-size:30px}.tag{margin:10px 0 22px;color:#666;font-size:15px;line-height:1.5}
+.btn{display:block;width:100%;border:0;text-decoration:none;background:linear-gradient(90deg,#ff1744,#ff3d68);color:#fff;padding:17px;border-radius:15px;font-weight:800;font-size:18px;box-shadow:0 9px 22px #ff17443d;cursor:pointer}
+.btn:disabled{opacity:.65}.small{font-size:12px;color:#777;margin-top:12px}
+.status{display:none;margin-top:18px;text-align:left;background:#fff7f8;border-radius:18px;padding:18px}.status.show{display:block}
+.status-title{font-weight:800;margin-bottom:10px}.progress{height:10px;background:#eee;border-radius:20px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#ff1744,#ff6b35);transition:width .2s}
+.percent{text-align:center;font-size:13px;font-weight:700;margin-top:8px}.done{color:#138a3d;font-weight:800}
+.install-btn{display:none;margin-top:14px}.install-btn.show{display:block}
+.steps{text-align:left;margin-top:28px;background:#fff7f8;border-radius:18px;padding:18px}
+.steps b{display:block;margin-bottom:10px}.steps p{margin:9px 0;font-size:14px;color:#444}
+.badge{display:inline-block;margin-top:20px;padding:7px 12px;border-radius:20px;background:#f2f2f2;color:#555;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;padding:22px;z-index:10}
+.modal.show{display:flex}.modal-box{width:100%;max-width:380px;background:#fff;border-radius:24px;padding:26px;text-align:center;box-shadow:0 20px 60px #0006}
+.modal-icon{font-size:48px;margin-bottom:8px}.modal h2{margin:4px 0 10px}.modal p{color:#555;line-height:1.5;margin:8px 0 18px}
+.modal .primary{display:block;text-decoration:none;background:linear-gradient(90deg,#ff1744,#ff3d68);color:#fff;padding:15px;border-radius:14px;font-weight:800;font-size:17px}
+.modal .secondary{margin-top:10px;border:0;background:#f1f1f1;color:#333;padding:12px 18px;border-radius:12px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap"><main class="card">
+<div class="logo">DD</div>
+<h1>DealDekho</h1>
+<div class="tag">Smart shopping deals, offers and trending products — all in one place.</div>
+
+<button class="btn" id="downloadBtn">⬇ Download DealDekho APK</button>
+
+<div class="status" id="status">
+  <div class="status-title" id="statusTitle">Downloading DealDekho…</div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="percent" id="percent">0%</div>
+  <div class="small" id="statusText">APK download ho raha hai…</div>
+  <button class="btn install-btn" id="installBtn">🟢 Install DealDekho</button>
+</div>
+
+<div class="small">Free download • Android app</div>
+<div class="steps">
+<b>Install karne ka tarika</b>
+<p>1. Download button दबाएँ.</p>
+<p>2. Download पूरा होने तक इसी page पर status देखें.</p>
+<p>3. Download complete होने पर <b>Install DealDekho</b> दबाएँ.</p>
+<p>4. Android ka system installer/permission aaye to uske instructions follow karein.</p>
+</div>
+<div class="badge">Official DealDekho Download</div>
+</main></div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <h2>DealDekho Ready to Install</h2>
+    <p>APK download ho gaya hai. Ab <b>Install</b> dabakar Android ke installation process par ja sakte hain.</p>
+    <a class="primary" id="openInstaller" href="#">Install DealDekho</a>
+    <button class="secondary" id="closeModal">Close</button>
+  </div>
+</div>
+
+<script>
+let apkUrl=null;
+const btn=document.getElementById('downloadBtn'), status=document.getElementById('status');
+const bar=document.getElementById('bar'), percent=document.getElementById('percent');
+const title=document.getElementById('statusTitle'), textEl=document.getElementById('statusText');
+const install=document.getElementById('installBtn'), modal=document.getElementById('modal');
+const openInstaller=document.getElementById('openInstaller');
+
+btn.onclick=async()=>{
+ btn.disabled=true; btn.textContent='Downloading…'; status.classList.add('show');
+ try{
+  const r=await fetch('DealDekho.apk',{cache:'no-store'}); if(!r.ok) throw 0;
+  const total=Number(r.headers.get('Content-Length'))||0, reader=r.body.getReader();
+  const chunks=[]; let got=0;
+  while(true){
+   const x=await reader.read(); if(x.done) break; chunks.push(x.value); got+=x.value.length;
+   if(total){let p=Math.round(got/total*100);bar.style.width=p+'%';percent.textContent=p+'%';}
+  }
+  const blob=new Blob(chunks,{type:'application/vnd.android.package-archive'});
+  apkUrl=URL.createObjectURL(blob);
+  bar.style.width='100%'; percent.textContent='100%';
+  title.innerHTML='<span class="done">✓ Download Complete</span>';
+  textEl.textContent='APK ready hai. Install button dabाएँ.';
+  install.classList.add('show'); btn.style.display='none';
+  install.onclick=()=>{ modal.classList.add('show'); openInstaller.href=apkUrl; };
+ }catch(e){
+  title.textContent='Download failed'; textEl.textContent='Please try again.';
+  btn.disabled=false; btn.textContent='↻ Try Download Again';
+ }
+};
+document.getElementById('closeModal').onclick=()=>modal.classList.remove('show');
+</script>
+</body>
+</html>
