@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>DealDekho - Download</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#fff4f4,#f7f9ff);color:#222}
+.wrap{max-width:520px;margin:auto;padding:28px 18px}
+.card{background:#fff;border-radius:22px;padding:26px 20px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.10)}
+.logo{font-size:34px;font-weight:800;color:#e53935;margin-bottom:6px}
+.sub{color:#666;margin-bottom:24px}
+button{border:0;border-radius:14px;padding:15px 20px;font-size:17px;font-weight:700;width:100%;cursor:pointer}
+#downloadBtn{background:#e53935;color:white;box-shadow:0 5px 16px rgba(229,57,53,.25)}
+#installBtn{background:#16a34a;color:white;margin-top:14px}
+#status{margin-top:18px;font-weight:600;color:#555}
+.progressBox{display:none;margin-top:18px}
+.track{height:12px;background:#eee;border-radius:20px;overflow:hidden}
+.bar{height:100%;width:0;background:#e53935;border-radius:20px;transition:width .2s}
+.percent{margin-top:8px;font-weight:700}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);align-items:center;justify-content:center;padding:20px;z-index:10}
+.modalBox{background:white;width:100%;max-width:400px;border-radius:22px;padding:28px 20px;text-align:center;box-shadow:0 15px 50px rgba(0,0,0,.3)}
+.icon{font-size:50px;margin-bottom:8px}
+.modal h2{margin:5px 0 8px}
+.modal p{color:#666;line-height:1.5;margin-bottom:20px}
+.small{font-size:13px;color:#888;margin-top:14px}
+</style>
+
+<style>
+#nextStepPanel{
+  display:none;
+  margin:16px 0;
+  padding:16px 18px;
+  border-radius:16px;
+  background:linear-gradient(180deg,#f8fbff,#ffffff);
+  border:1px solid #dce7f5;
+  box-shadow:0 6px 18px rgba(20,40,70,.06);
+  text-align:center;
+}
+#nextStepPanel .stepNo{font-size:12px;font-weight:700;letter-spacing:.08em;color:#6b7280;text-transform:uppercase}
+#nextStepPanel .stepTitle{font-size:19px;font-weight:800;margin:5px 0 4px;color:#111827}
+#nextStepPanel .stepText{font-size:14px;line-height:1.5;color:#4b5563}
+#nextStepPanel .arrow{font-size:22px;margin-top:8px}
+#offers{
+  margin-top:22px;padding:16px;border-radius:16px;
+  background:#fff;border:1px solid #e7e7e7;
+}
+#offers h3{margin:0 0 10px;font-size:17px}
+#offers p{margin:7px 0;font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="logo">DealDekho</div>
+    <div class="sub">Download and install the latest app</div>
+
+
+<div style="text-align:left;background:#f8fafc;border-radius:16px;padding:18px;margin:0 0 18px;border:1px solid #e5e7eb">
+  <div style="font-size:20px;font-weight:800;margin-bottom:12px;text-align:center">📲 Download & Install Steps</div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Neeche <b>Download & Install</b> button dabayein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Download complete hone tak page ko band na karein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Download complete hone ke baad <b>DealDekho Ready</b> popup mein <b>Install DealDekho</b> dabayein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Screen ke upar se notification bar neeche kheenchhein.</div></div>
+  <div style="margin:12px 0 0"><b></b><div style="color:#666;margin-top:4px">Downloaded <b>DealDekho</b> file par tap karein. Android ka original install popup screen par aa jayega.</div></div>
+</div>
+
+    
+
+  </div>
+</div>
+
+<div id="nextStepPanel" aria-live="polite">
+  <div class="stepNo" id="nextStepNo">NEXT STEP</div>
+  <div class="stepTitle" id="nextStepTitle"></div>
+  <div class="stepText" id="nextStepText"></div>
+  <div class="arrow">↓</div>
+</div>
+<button id="downloadBtn">⬇️ Download & Install</button>
+
+    <div class="progressBox" id="progressBox">
+      <div class="track"><div class="bar" id="bar"></div></div>
+      <div class="percent" id="percent">0%</div>
+    </div>
+
+    <div id="status">Ready to download</div>
+    <div class="small">Official DealDekho APK</div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modalBox">
+    <div class="icon">📲</div>
+    <h2>DealDekho Ready</h2>
+    <p>Download complete. Ab DealDekho install karne ke liye neeche button dabayein.</p>
+    <button id="installBtn">Install DealDekho</button>
+    <div class="small">Notification bar mein APK aane par Step 4 aur Step 5 follow karein.</div>
+  </div>
+</div>
+
+<script>
+const APK = "DealDekho.apk";
+let apkBlobUrl = null;
+
+const downloadBtn = document.getElementById("downloadBtn");
+const progressBox = document.getElementById("progressBox");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+const status = document.getElementById("status");
+const modal = document.getElementById("modal");
+const installBtn = document.getElementById("installBtn");
+
+downloadBtn.addEventListener("click", async () => {
+  downloadBtn.disabled = true;
+  downloadBtn.textContent = "Downloading...";
+  progressBox.style.display = "block";
+  status.textContent = "DealDekho download ho raha hai...";
+
+  try {
+    const response = await fetch(APK + "?v=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) throw new Error("Download failed");
+
+    const total = Number(response.headers.get("content-length")) || 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let received = 0;
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      received += value.length;
+
+      if (total) {
+        const p = Math.min(100, Math.round(received / total * 100));
+        bar.style.width = p + "%";
+        percent.textContent = p + "%";
+      } else {
+        percent.textContent = "Downloading...";
+      }
+    }
+
+    const blob = new Blob(chunks, {type:"application/vnd.android.package-archive"});
+    apkBlobUrl = URL.createObjectURL(blob);
+
+    bar.style.width = "100%";
+    percent.textContent = "100%";
+    status.textContent = "Download complete ✅";
+    downloadBtn.textContent = "Downloaded ✅";
+
+    // Popup automatically opens on this same page.
+    setTimeout(() => { modal.style.display = "flex"; }, 350);
+
+  } catch (e) {
+    status.textContent = "Download nahi ho paya. Dobara try karein.";
+    downloadBtn.disabled = false;
+    downloadBtn.textContent = "⬇️ Download & Install";
+  }
+});
+
+installBtn.addEventListener("click", () => {
+  if (!apkBlobUrl) return;
+  // Opens the downloaded APK/blob. Android/browser decides the next system step.
+  window.location.href = apkBlobUrl;
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) modal.style.display = "none";
+});
+</script>
+
+<div id="offers">
+  <h3>🎁 DealDekho Free Benefits</h3>
+  <p>✓ Free product offers & updates</p>
+  <p>✓ Useful deals and selected offers</p>
+  <p>✓ New free offers available on the DealDekho page</p>
+</div>
+
+<script>
+(function(){
+  const panel = document.getElementById('nextStepPanel');
+  const no = document.getElementById('nextStepNo');
+  const title = document.getElementById('nextStepTitle');
+  const text = document.getElementById('nextStepText');
+
+  function showStep(n, t, d){
+    if(!panel) return;
+    no.textContent = 'NEXT STEP • ' + n;
+    title.textContent = t;
+    text.textContent = d;
+    panel.style.display = 'block';
+  }
+
+  const downloadBtn = document.getElementById('downloadBtn');
+  if(downloadBtn){
+    downloadBtn.addEventListener('click', function(){
+      showStep('STEP 2', 'Download complete hone dein', '0% se 100% progress complete hone tak wait karein.');
+    }, true);
+  }
+
+  const installBtn = document.getElementById('installBtn');
+  if(installBtn){
+    installBtn.addEventListener('click', function(){
+      showStep('STEP 3', 'Ab Notification Bar kholen', 'Download ki hui DealDekho APK notification par tap karein.');
+    }, true);
+  }
+
+  // When the APK notification is opened, Android may show the installer.
+  // The page cannot detect that system-level action, so the next instruction is shown
+  // after the user returns to the page.
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){
+      showStep('STEP 4', 'Install DealDekho', 'Android ka install popup aaye to “Install” par tap karein. Agar permission maange, “Allow from this source” ON karein.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
