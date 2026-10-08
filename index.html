@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>DealDekho - Download</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#fff4f4,#f7f9ff);color:#222}
+.wrap{max-width:520px;margin:auto;padding:28px 18px}
+.card{background:#fff;border-radius:22px;padding:26px 20px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.10)}
+.logo{font-size:34px;font-weight:800;color:#e53935;margin-bottom:6px}
+.sub{color:#666;margin-bottom:24px}
+button{border:0;border-radius:14px;padding:15px 20px;font-size:17px;font-weight:700;width:100%;cursor:pointer}
+#downloadBtn{background:#e53935;color:white;box-shadow:0 5px 16px rgba(229,57,53,.25)}
+#installBtn{background:#16a34a;color:white;margin-top:14px}
+#status{margin-top:18px;font-weight:600;color:#555}
+.progressBox{display:none;margin-top:18px}
+.track{height:12px;background:#eee;border-radius:20px;overflow:hidden}
+.bar{height:100%;width:0;background:#e53935;border-radius:20px;transition:width .2s}
+.percent{margin-top:8px;font-weight:700}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);align-items:center;justify-content:center;padding:20px;z-index:10}
+.modalBox{background:white;width:100%;max-width:400px;border-radius:22px;padding:28px 20px;text-align:center;box-shadow:0 15px 50px rgba(0,0,0,.3)}
+.icon{font-size:50px;margin-bottom:8px}
+.modal h2{margin:5px 0 8px}
+.modal p{color:#666;line-height:1.5;margin-bottom:20px}
+.small{font-size:13px;color:#888;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="logo">DealDekho</div>
+    <div class="sub">Download and install the latest app</div>
+
+
+<div style="text-align:left;background:#f8fafc;border-radius:16px;padding:18px;margin:0 0 18px;border:1px solid #e5e7eb">
+  <div style="font-size:20px;font-weight:800;margin-bottom:12px;text-align:center">📲 Download & Install Steps</div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Neeche <b>Download & Install</b> button dabayein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Download complete hone tak page ko band na karein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Download complete hone ke baad <b>DealDekho Ready</b> popup mein <b>Install DealDekho</b> dabayein.</div></div>
+  <div style="margin:12px 0"><b></b><div style="color:#666;margin-top:4px">Screen ke upar se notification bar neeche kheenchhein.</div></div>
+  <div style="margin:12px 0 0"><b></b><div style="color:#666;margin-top:4px">Downloaded <b>DealDekho</b> file par tap karein. Android ka original install popup screen par aa jayega.</div></div>
+</div>
+
+    
+<div style="margin:18px 0 22px;padding:18px;border-radius:18px;background:#f7f9fc;border:1px solid #e3e8ef;">
+  <div style="font-size:20px;font-weight:800;margin-bottom:14px;">📲 DealDekho Install Guide</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">1️⃣</div>
+    <div><b>Download DealDekho</b><br><span>Download & Install button dabayein</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">2️⃣</div>
+    <div><b>0% → 100%</b><br><span>Download complete hone tak wait karein</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">3️⃣</div>
+    <div><b>Install DealDekho</b><br><span>Page par “Install DealDekho” button dabayein</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">4️⃣</div>
+    <div><b>Notification Bar</b><br><span>Mobile ki upar wali notification bar neeche swipe karein</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">5️⃣</div>
+    <div><b>DealDekho APK par tap karein</b><br><span>Downloaded APK notification ko open karein</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0;">
+    <div style="font-size:24px;">6️⃣</div>
+    <div><b>Permission — sirf agar Android pooche</b><br><span>“Allow from this source” / “Install unknown apps” aaye to browser ke liye Allow ON karein. Agar message na aaye, is step ko skip karein.</span></div>
+  </div>
+  <div style="text-align:center;font-size:25px;">⬇️</div>
+
+  <div style="display:flex;align-items:flex-start;gap:10px;margin:12px 0 2px;">
+    <div style="font-size:24px;">7️⃣</div>
+    <div><b>Install dabayein ✅</b><br><span>Android ke Install popup par Install dabayein.</span></div>
+  </div>
+</div>
+<button id="downloadBtn">⬇️ Download & Install</button>
+
+    <div class="progressBox" id="progressBox">
+      <div class="track"><div class="bar" id="bar"></div></div>
+      <div class="percent" id="percent">0%</div>
+    </div>
+
+    <div id="status">Ready to download</div>
+    <div class="small">Official DealDekho APK</div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modalBox">
+    <div class="icon">📲</div>
+    <h2>DealDekho Ready</h2>
+    <p>Download complete. Ab DealDekho install karne ke liye neeche button dabayein.</p>
+    <button id="installBtn">Install DealDekho</button>
+    <div class="small">Notification bar mein APK aane par Step 4 aur Step 5 follow karein.</div>
+  </div>
+</div>
+
+<script>
+const APK = "DealDekho.apk";
+let apkBlobUrl = null;
+
+const downloadBtn = document.getElementById("downloadBtn");
+const progressBox = document.getElementById("progressBox");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+const status = document.getElementById("status");
+const modal = document.getElementById("modal");
+const installBtn = document.getElementById("installBtn");
+
+downloadBtn.addEventListener("click", async () => {
+  downloadBtn.disabled = true;
+  downloadBtn.textContent = "Downloading...";
+  progressBox.style.display = "block";
+  status.textContent = "DealDekho download ho raha hai...";
+
+  try {
+    const response = await fetch(APK + "?v=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) throw new Error("Download failed");
+
+    const total = Number(response.headers.get("content-length")) || 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let received = 0;
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      received += value.length;
+
+      if (total) {
+        const p = Math.min(100, Math.round(received / total * 100));
+        bar.style.width = p + "%";
+        percent.textContent = p + "%";
+      } else {
+        percent.textContent = "Downloading...";
+      }
+    }
+
+    const blob = new Blob(chunks, {type:"application/vnd.android.package-archive"});
+    apkBlobUrl = URL.createObjectURL(blob);
+
+    bar.style.width = "100%";
+    percent.textContent = "100%";
+    status.textContent = "Download complete ✅";
+    downloadBtn.textContent = "Downloaded ✅";
+
+    // Popup automatically opens on this same page.
+    setTimeout(() => { modal.style.display = "flex"; }, 350);
+
+  } catch (e) {
+    status.textContent = "Download nahi ho paya. Dobara try karein.";
+    downloadBtn.disabled = false;
+    downloadBtn.textContent = "⬇️ Download & Install";
+  }
+});
+
+installBtn.addEventListener("click", () => {
+  if (!apkBlobUrl) return;
+  // Opens the downloaded APK/blob. Android/browser decides the next system step.
+  window.location.href = apkBlobUrl;
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) modal.style.display = "none";
+});
+</script>
+</body>
+</html>
